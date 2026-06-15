@@ -6,8 +6,11 @@
 !1_structured_output
 !1_structured_output/**
 
+!requirements.txt
+!Dockerfile
+!compose.yaml
 
-!.env
-!.swp
+*.env
+*.swp
 
 

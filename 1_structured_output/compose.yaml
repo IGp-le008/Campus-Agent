@@ -1,0 +1,24 @@
+services:
+        app:
+                image: structured_output_image:campus
+
+                build:
+                        context: .
+                        dockerfile: Dockerfile
+
+                command:
+                        python main.py
+
+                env_file:
+                        - .env
+                
+                stdin_open:
+                        true
+
+                tty:
+                        true
+
+                container_name:
+                        structured_output_container
+
+
