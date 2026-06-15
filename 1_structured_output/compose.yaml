@@ -7,7 +7,7 @@ services:
                         dockerfile: Dockerfile
 
                 command:
-                        python main.py
+                        python typed_dict.py
 
                 env_file:
                         - .env
