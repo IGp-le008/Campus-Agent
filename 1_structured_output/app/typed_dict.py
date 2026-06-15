@@ -31,5 +31,13 @@ I recently upgraded to the Quantum Nexus 10, and it has easily exceeded my expec
 """)
 
 
+print("-----------------------------------------Structured Output Using TypedDict-------------------------------------------\n\n")
+
+
 print(result)
+
+
+
+print("----------------------------------------------------------------------------------------------------------------------")
+
 
