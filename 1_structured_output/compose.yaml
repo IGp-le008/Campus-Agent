@@ -10,7 +10,7 @@ services:
                         sh -c "python typed_dict.py && python structured_pydantic.py"
 
                 env_file:
-                        - .env
+                        - ../.env
                 
                 stdin_open:
                         true

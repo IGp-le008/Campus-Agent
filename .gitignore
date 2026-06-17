@@ -10,6 +10,10 @@
 !Dockerfile
 !compose.yaml
 
+!2_chains
+!2_chains/**
+
+
 *.env
 *.swp
 
