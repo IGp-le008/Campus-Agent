@@ -1,0 +1,23 @@
+services:
+        simple_chain:
+                image: simple_chain:campus
+
+                build:
+                        context: .
+                        dockerfile: Dockerfile
+                 
+                env_file:
+                        ../.env
+
+                command:
+                        python simple_chain.py
+
+                tty:
+                        true
+                
+                stdin_open: 
+                        true
+
+                container_name:
+                        simple_chain_container
+                
