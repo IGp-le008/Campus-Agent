@@ -20,4 +20,29 @@ services:
 
                 container_name:
                         simple_chain_container
-                
+
+
+
+        sequential_chain:
+                image: simple_chain:campus
+
+                build:
+                        context: .
+                        dockerfile: Dockerfile
+
+                env_file:
+                        - ../.env
+
+                command:
+                        python sequential_chain.py
+
+                tty:
+                        true
+
+                stdin_open:
+                        true 
+
+                container_name:
+                        sequential_chain_container
+
+
