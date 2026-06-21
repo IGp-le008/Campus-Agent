@@ -55,7 +55,7 @@ classifier_chain = prompt_sentiment | model | pydantic_parser
 # print(classifier_chain.invoke({'feedback':'I like this product!'}))
 
 
-final_chain = classifier_chain | branch_chaincler
+final_chain = classifier_chain | branch_chain
 
 result=final_chain.invoke({'feedback': 'I love the new features in your product! It has made my life so much easier.'})
 

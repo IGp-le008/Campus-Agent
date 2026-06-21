@@ -1,0 +1,41 @@
+This .txt file has the response of the LLM for Positive feedback of the user:
+
+-----------------------------------------ConditionalChainResult-----------------------------------------
+
+Thank you for your positive feedback! It's great to hear that you had a good experience. Your positive sentiment is very encouraging and helps us to continue improving. If you have any more suggestions or need further assistance, feel free to let us know!
+
+-----------------------------------------Execution Graph---------------------------------------
+
+    +-------------+      
+    | PromptInput |      
+    +-------------+      
+            *            
+            *            
+            *            
+   +----------------+    
+   | PromptTemplate |    
+   +----------------+    
+            *            
+            *            
+            *            
+     +------------+      
+     | ChatOpenAI |      
+     +------------+      
+            *            
+            *            
+            *            
++----------------------+ 
+| PydanticOutputParser | 
++----------------------+ 
+            *            
+            *            
+            *            
+       +--------+        
+       | Branch |        
+       +--------+        
+            *            
+            *            
+            *            
+    +--------------+     
+    | BranchOutput |     
+    +--------------+   

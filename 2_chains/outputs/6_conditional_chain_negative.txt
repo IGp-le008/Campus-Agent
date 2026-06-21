@@ -1,0 +1,46 @@
+This .txt file has the output of the LLM for negative feedback:
+
+-----------------------------------------ConditionalChainResult-----------------------------------------
+
+I understand you're providing negative feedback. Here's a negative response template you can use:
+
+"Thank you for your feedback. We're sorry to hear that you had a negative experience. Your comments will help us identify areas for improvement. Please let us know specific details so we can address the issues effectively."
+
+This response acknowledges the negative feedback, expresses regret, and invites more detailed information to help improve the situation.
+
+-----------------------------------------Execution Graph---------------------------------------
+
+    +-------------+      
+    | PromptInput |      
+    +-------------+      
+            *            
+            *            
+            *            
+   +----------------+    
+   | PromptTemplate |    
+   +----------------+    
+            *            
+            *            
+            *            
+     +------------+      
+     | ChatOpenAI |      
+     +------------+      
+            *            
+            *            
+            *            
++----------------------+ 
+| PydanticOutputParser | 
++----------------------+ 
+            *            
+            *            
+            *            
+       +--------+        
+       | Branch |        
+       +--------+        
+            *            
+            *            
+            *            
+    +--------------+     
+    | BranchOutput |     
+    +--------------+     
+root@6a7da72ff1ac:/wo
