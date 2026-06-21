@@ -52,18 +52,18 @@ branch_chain=RunnableBranch(
 
 classifier_chain = prompt_sentiment | model | pydantic_parser
 
-print(classifier_chain.invoke({'feedback':'I like this product!'}))
+# print(classifier_chain.invoke({'feedback':'I like this product!'}))
 
 
-# final_chain = classifier_chain | branch_chaincler
+final_chain = classifier_chain | branch_chaincler
 
-# result=final_chain.invoke({'feedback': 'I love the new features in your product! It has made my life so much easier.'})
+result=final_chain.invoke({'feedback': 'I love the new features in your product! It has made my life so much easier.'})
 
-# print("-----------------------------------------ConditionalChainResult-----------------------------------------\n")
-# print(result)
+print("-----------------------------------------ConditionalChainResult-----------------------------------------\n")
+print(result)
 
 
-# print("\n-----------------------------------------Execution Graph---------------------------------------\n")
-# final_chain.get_graph().print_ascii()
+print("\n-----------------------------------------Execution Graph---------------------------------------\n")
+final_chain.get_graph().print_ascii()
 
 
