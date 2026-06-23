@@ -35,15 +35,31 @@ parallel_chain= RunnableParallel({
     "linkedin_post": RunnableSequence(prompt2, model, StrOutputParser())
 })
 
-final_chain = RunnableSequence(parallel_chain, prompt3, model, parser)
+summary_chain = RunnableSequence(prompt3, model, parser)
+
+final_chain = RunnableParallel({
+    "post":parallel_chain,
+    "summary":RunnableSequence(parallel_chain, summary_chain)
+})
+
+  
 
 result = final_chain.invoke({
     "instagram_topic": "Importance of santitary hygiene in daily life",
     "linkedin_topic": "The benefits of meditation for mental health"
 })
 
-print("------------------------------Runnable Parallel Result---------------------------------")
-print(result)
+print("------------------------------Intermediate LLM Post Result---------------------------------")
+
+print(f"#Instagram Post: {result['post']['instagram_post']}\n")
+print(f"#LinkedIn Post: {result['post']['linkedin_post']}")
+
+
+print("------------------------------Runnable Parallel (Post) Result---------------------------------")
+
+print(result["summary"])
 
 print("------------------------------Execution Graph---------------------------------  ")
+
 final_chain.get_graph().print_ascii()
+

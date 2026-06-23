@@ -1,0 +1,72 @@
+------------------------------Intermediate LLM Post Result---------------------------------
+#Instagram Post: 💧Clean hands, healthy life! Practicing good hygiene is crucial for preventing illnesses. Wash hands regularly, cover coughs, and keep surfaces clean. Let's prioritize sanitation in our daily routines! 🦠🧼 #HygieneMatters #DailyHealth #SanitizeTogether
+
+#LinkedIn Post: 🌱 Regular meditation can significantly enhance mental health by reducing stress, improving focus, and boosting emotional resilience. It's a powerful tool for maintaining mental well-being in our fast-paced lives. 🧘‍♀️✨ #MentalHealth #Mindfulness #WellnessJourney
+------------------------------Runnable Parallel (Post) Result---------------------------------
+### Instagram:
+1. Practicing good hygiene is crucial for preventing illnesses.
+2. Regular hand washing, covering coughs, and keeping surfaces clean are important hygiene practices.
+3. Prioritizing sanitation in daily routines can contribute to a healthier life.
+
+### LinkedIn:
+1. Regular meditation can significantly enhance mental health.
+2. Meditation helps reduce stress, improve focus, and boost emotional resilience.
+3. Meditation is a powerful tool for maintaining mental well-being in fast-paced lives.
+------------------------------Execution Graph---------------------------------  
+                                                  +-----------------------------+                                                    
+                                                  | Parallel<post,summary>Input |                                                    
+                                                  +-----------------------------+**                                                  
+                                           *******                                 *******                                           
+                                     ******                                               *******                                    
+                                 ****                                                            ******                              
+  +---------------------------------------------+                                                      ****                          
+  | Parallel<instagram_post,linkedin_post>Input |                                                         *                          
+  +---------------------------------------------+                                                         *                          
+                 **               **                                                                      *                          
+              ***                   ***                                                                   *                          
+            **                         **                                                                 *                          
++----------------+                +----------------+                                                      *                          
+| PromptTemplate |                | PromptTemplate |                                                      *                          
++----------------+                +----------------+                                                      *                          
+          *                               *                                                               *                          
+          *                               *                                                               *                          
+          *                               *                                                               *                          
+  +------------+                    +------------+                                                        *                          
+  | ChatOpenAI |                    | ChatOpenAI |                                                        *                          
+  +------------+                    +------------+                                                        *                          
+          *                               *                                                               *                          
+          *                               *                                                               *                          
+          *                               *                                                               *                          
++-----------------+              +-----------------+                              +---------------------------------------------+    
+| StrOutputParser |              | StrOutputParser |                              | Parallel<instagram_post,linkedin_post>Input |    
++-----------------+              +-----------------+                              +---------------------------------------------+    
+                 **               **                                                             **               **                 
+                   ***         ***                                                            ***                   ***              
+                      **     **                                                             **                         **            
+  +----------------------------------------------+                              +----------------+                +----------------+ 
+  | Parallel<instagram_post,linkedin_post>Output |                              | PromptTemplate |                | PromptTemplate | 
+  +----------------------------------------------+                              +----------------+                +----------------+ 
+                          *                                                               *                               *          
+                          *                                                               *                               *          
+                          *                                                               *                               *          
+                 +----------------+                                               +------------+                    +------------+   
+                 | PromptTemplate |                                               | ChatOpenAI |                    | ChatOpenAI |   
+                 +----------------+                                               +------------+                    +------------+   
+                          *                                                               *                               *          
+                          *                                                               *                               *          
+                          *                                                               *                               *          
+                   +------------+                                               +-----------------+              +-----------------+ 
+                   | ChatOpenAI |                                               | StrOutputParser |              | StrOutputParser | 
+                   +------------+                                               +-----------------+              +-----------------+ 
+                          *                                                                      **               **                 
+                          *                                                                        ***         ***                   
+                          *                                                                           **     **                      
+                +-----------------+                                               +----------------------------------------------+   
+                | StrOutputParser |**                                             | Parallel<instagram_post,linkedin_post>Output |   
+                +-----------------+  ******                                       +----------------------------------------------+   
+                                           *******                                 *******                                           
+                                                  ******                     ******                                                  
+                                                        ****             ****                                                        
+                                                  +------------------------------+                                                   
+                                                  | Parallel<post,summary>Output |                                                   
+                                                  +------------------------------+   
