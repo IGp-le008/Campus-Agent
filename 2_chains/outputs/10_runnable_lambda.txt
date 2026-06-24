@@ -1,0 +1,37 @@
+------------------------------Runnable Lambda Result---------------------------------
+Summary:  Artificial Intelligence involves algorithms and machines that perform tasks requiring human-like intelligence, including learning, problem-solving, and decision-making.
+Word Count:  17
+------------------------------Execution Graph---------------------------------  
+       +-----------------------------------+         
+       | Parallel<summary,word_count>Input |         
+       +-----------------------------------+         
+                 **              ***                 
+              ***                   **               
+            **                        ***            
++----------------+                       **          
+| PromptTemplate |                        *          
++----------------+                        *          
+          *                               *          
+          *                               *          
+          *                               *          
+  +------------+                +----------------+   
+  | ChatOpenAI |                | PromptTemplate |   
+  +------------+                +----------------+   
+          *                               *          
+          *                               *          
+          *                               *          
++-----------------+               +------------+     
+| StrOutputParser |               | ChatOpenAI |     
++-----------------+               +------------+     
+          *                               *          
+          *                               *          
+          *                               *          
+  +------------+                +-----------------+  
+  | word_count |                | StrOutputParser |  
+  +------------+*               +-----------------+  
+                 **              **                  
+                   ***        ***                    
+                      **    **                       
+      +------------------------------------+         
+      | Parallel<summary,word_count>Output |         
+      +------------------------------------+   
