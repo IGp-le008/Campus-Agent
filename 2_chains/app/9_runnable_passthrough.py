@@ -39,8 +39,13 @@ result=final_chain.invoke({"topic":"Artificial Intelligence"})
 
 print("------------------------------Runnable Passthrough Result---------------------------------")
 
-print(result)
+print("----------Points----------")
 
+print("Points: ", result["points"])
+
+print("----------Summary----------")
+
+print("Summary: ", result["summary"])
 
 print("------------------------------Execution Graph---------------------------------  ")
 final_chain.get_graph().print_ascii()
