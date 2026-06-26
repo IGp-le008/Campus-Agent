@@ -13,6 +13,8 @@
 !2_chains
 !2_chains/**
 
+!3_document_loaders
+!3_document_loaders/**
 
 Campus.code-workspace
 
