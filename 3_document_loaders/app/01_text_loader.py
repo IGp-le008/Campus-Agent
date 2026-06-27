@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from langchain_community.document_loaders import TextLoader
 
 loader = TextLoader("../media/ai_essay.txt")
