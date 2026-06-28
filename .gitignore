@@ -21,5 +21,7 @@ Campus.code-workspace
 
 *.env
 *.swp
+bug
+bug/**
 
 
