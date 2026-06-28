@@ -1,0 +1,43 @@
+__________ Metadata Of Page 1 __________
+
+{'producer': 'PyPDF2', 'creator': 'PyPDF', 'creationdate': '', 'source': '../media/ai_essay.pdf', 'total_pages': 5, 'page': 0, 'page_label': '1'}
+
+-------------------- LLM Summarized Output --------------------
+
+1. **Definition and Scope**: AI involves machines performing tasks that typically require human intelligence, including learning, reasoning, problem-solving, decision-making, understanding language, and recognizing images or patterns.
+
+2. **Purpose**: The goal of AI is to assist humans in completing tasks more accurately and efficiently, not to replace human effort entirely.
+
+3. **Historical Context**: The concept of intelligent machines dates back centuries, but the scientific study of AI began in the mid-20th century, with the term "Artificial Intelligence" coined by John McCarthy in 1956.
+
+4. **Evolution**: Early AI research focused on solving mathematical problems and playing games, but faced setbacks due to limited computing resources and unrealistic expectations, leading to "AI winters." Recent advancements in computing power, data availability, and machine learning algorithms have revived and accelerated AI development.
+
+5. **Current Impact**: AI is now a crucial part of daily life, influencing processes in various sectors through virtual assistants, recommendation systems, and more, driving digital transformation.
+--------------------LLMExecutionGraph--------------------
+     +-------------+       
+     | PromptInput |       
+     +-------------+       
+            *              
+            *              
+            *              
+    +----------------+     
+    | PromptTemplate |     
+    +----------------+     
+            *              
+            *              
+            *              
+      +------------+       
+      | ChatOpenAI |       
+      +------------+       
+            *              
+            *              
+            *              
+   +-----------------+     
+   | StrOutputParser |     
+   +-----------------+     
+            *              
+            *              
+            *              
++-----------------------+  
+| StrOutputParserOutput |  
++-----------------------+  
