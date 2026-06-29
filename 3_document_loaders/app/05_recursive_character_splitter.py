@@ -1,0 +1,24 @@
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size = 250,
+    chunk_overlap = 0,
+)
+
+text = """
+rtificial Intelligence (AI) is one of the most significant technological developments of the modern era. It refers to the ability of computers and machines to perform tasks that typically require human intelligence, such as learning, reasoning, problem-solving, decision-making, understanding language, and recognizing images or patterns. AI has transformed the way people interact with technology and has become an essential part of daily life. From virtual assistants on smartphones to recommendation systems used by online shopping platforms, AI is making processes faster, more efficient, and more personalized.
+
+The goal of artificial intelligence is not simply to replace human effort but to assist people in completing tasks more accurately and efficiently. Researchers and engineers continue to develop AI systems that can analyze large amounts of data, identify patterns, and make informed decisions with minimal human intervention. As computing power and data availability continue to increase, AI is expected to play an even greater role in society.
+
+## History and Evolution of Artificial Intelligence
+
+The concept of intelligent machines has existed for centuries in myths, stories, and philosophical discussions. However, the scientific study of artificial intelligence began during the mid-twentieth century. In 1956, computer scientist John McCarthy introduced the term "Artificial Intelligence" at the Dartmouth Conference, which is widely considered the birthplace of AI as an academic field.
+
+During the early years, researchers focused on creating programs capable of solving mathematical problems and playing strategic games such as chess. Although initial progress was promising, limited computing resources and unrealistic expectations led to periods known as "AI winters," during which research funding and public interest declined.
+
+The field experienced a major revival with the development of more powerful computers, larger datasets, and advanced machine learning algorithms. In the twenty-first century, breakthroughs in deep learning, neural networks, and cloud computing enabled AI systems to achieve remarkable performance in speech recognition, image classification, natural language processing, and autonomous systems. Today, AI continues to evolve rapidly and is considered one of the driving forces behind digital transformation.
+"""
+
+result = splitter.split_text(text)
+
+print(result)
