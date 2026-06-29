@@ -7,7 +7,8 @@ The goal of artificial intelligence is not simply to replace human effort but to
 
 splitter = CharacterTextSplitter(
     chunk_size = 100,
-    chunk_overlap= 0
+    chunk_overlap= 0,
+    separator= ""
 )
 
 result = splitter.split_text(text)
