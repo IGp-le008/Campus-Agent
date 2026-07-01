@@ -1,0 +1,18 @@
+9
+Chunk0: 
+import datetime 
+Chunk1:
+ class Task:
+    def __init__(self, title, description, priority):
+        self.title = title
+        self.description = description
+        self.priority = priority
+        self.completed = False
+Chunk2
+ def mark_completed(self):
+        self.completed = True
+        print(f"Task '{self.title}' marked as completed.")
+
+    def __str__(self):
+        status = "Done" if self.completed else "Pending"
+        return f"[{status}] {self.title} (Priority: {self.priority})"
