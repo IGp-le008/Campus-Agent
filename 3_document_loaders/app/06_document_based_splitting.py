@@ -1,4 +1,4 @@
-from langchain.text_splitter import RecursiveCharacterTextSplitter, Language
+from langchain_text_splitters import RecursiveCharacterTextSplitter, Language
 
 text = """
 import datetime
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 """
 
 splitter = RecursiveCharacterTextSplitter.from_language(
-    Language = Language.Python,
+    language = Language.PYTHON,
     chunk_size = 300,
     chunk_overlap = 0,
 )
@@ -80,4 +80,4 @@ chunk = splitter.split_text(text)
 
 print(len(chunk))
 
-print(chunk[0])
+print(f"Chunk0: \n{chunk[0]} \nChunk1:\n {chunk[1]}\nChunk2\n {chunk[2]}")
