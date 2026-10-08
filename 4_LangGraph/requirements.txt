@@ -1,0 +1,6 @@
+langgraph
+langchain
+dotenv
+pydantic
+numpy
+pandas
