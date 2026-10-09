@@ -7,9 +7,9 @@ from langchain_core.output_parsers import StrOutputParser
 load_dotenv()
     
 model = ChatOpenAI(
-    base_url="https://router.huggingface.co/v1",
-    api_key=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
-    model="Qwen/Qwen2.5-7B-Instruct"
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY"),
+    model="nvidia/nemotron-3.5-lightning:free"
 )
 
 
