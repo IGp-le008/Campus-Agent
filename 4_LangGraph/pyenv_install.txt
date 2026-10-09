@@ -1,0 +1,609 @@
+PYTHON 3.11 DEVELOPMENT ENVIRONMENT WITH PYENV
+Ubuntu 20.04 + VS Code
+
+============================================================
+GOAL
+
+Keep Ubuntu's system Python 3.8.10 unchanged while using
+Python 3.11.x for a specific project.
+
+Project:
+
+~/Documents/Tutor/Campus/4_LangGraph
+
+Final structure:
+
+System Python:
+/usr/bin/python3
+-> Python 3.8.10
+
+Development Python:
+~/.pyenv/versions/3.11.x/
+-> Python 3.11.x
+
+Project virtual environment:
+~/Documents/Tutor/Campus/4_LangGraph/.venv/
+-> Python 3.11.x
+
+============================================================
+IMPORTANT SAFETY RULE
+
+DO NOT replace or modify Ubuntu's system Python.
+
+DO NOT run commands such as:
+
+sudo ln -sf /path/to/python3.11 /usr/bin/python3
+
+
+DO NOT use:
+
+sudo pip install ...
+
+
+Python 3.8 is used by Ubuntu system tools.
+
+pyenv installs additional Python versions inside your home
+directory and does not replace the system Python.
+
+============================================================
+STEP 0 - VERIFY CURRENT SYSTEM PYTHON
+
+Run:
+
+which python3
+
+python3 --version
+
+ls -l /usr/bin/python3
+
+
+Expected result should be similar to:
+
+/usr/bin/python3
+
+Python 3.8.10
+
+============================================================
+STEP 1 - INSTALL BUILD DEPENDENCIES
+
+Update apt:
+
+sudo apt update
+
+
+Install the dependencies required to build Python:
+
+sudo apt install -y \
+  build-essential \
+  curl \
+  git \
+  libssl-dev \
+  zlib1g-dev \
+  libbz2-dev \
+  libreadline-dev \
+  libsqlite3-dev \
+  libncursesw5-dev \
+  xz-utils \
+  tk-dev \
+  libxml2-dev \
+  libxmlsec1-dev \
+  libffi-dev \
+  liblzma-dev
+
+============================================================
+STEP 2 - INSTALL PYENV
+
+Install pyenv:
+
+curl -fsSL https://pyenv.run | bash
+
+
+This installs pyenv under:
+
+~/.pyenv
+
+============================================================
+STEP 3 - CONFIGURE PYENV FOR BASH
+
+Add pyenv configuration to ~/.bashrc:
+
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+
+echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+
+echo 'eval "$(pyenv init - bash)"' >> ~/.bashrc
+
+
+Reload the shell:
+
+exec "$SHELL"
+
+
+Verify pyenv:
+
+pyenv --version
+
+
+Expected:
+
+pyenv 2.x.x
+
+============================================================
+STEP 4 - CHECK AVAILABLE PYTHON 3.11 VERSIONS
+
+Run:
+
+pyenv install --list | grep "3.11"
+
+
+This will show available Python 3.11 versions.
+
+For example:
+
+3.11.0
+3.11.1
+3.11.2
+...
+3.11.x
+
+
+Choose the latest available 3.11.x version.
+
+IMPORTANT:
+
+Replace 3.11.x in the commands below with the actual version
+you choose.
+
+Example:
+
+3.11.9
+
+============================================================
+STEP 5 - INSTALL PYTHON 3.11
+
+Example:
+
+pyenv install 3.11.9
+
+
+Replace 3.11.9 with your chosen version.
+
+The installation may take several minutes because pyenv may
+compile Python from source.
+
+============================================================
+STEP 6 - VERIFY PYTHON INSTALLATION
+
+Run:
+
+pyenv versions
+
+
+You should see something similar to:
+
+* system
+  3.11.9
+
+
+Check the installed Python directly:
+
+pyenv shell 3.11.9
+
+python --version
+
+
+Expected:
+
+Python 3.11.9
+
+============================================================
+STEP 7 - GO TO YOUR PROJECT
+
+Run:
+
+cd ~/Documents/Tutor/Campus/4_LangGraph
+
+============================================================
+STEP 8 - SET PYTHON 3.11 FOR THIS PROJECT
+
+Run:
+
+pyenv local 3.11.9
+
+
+Replace 3.11.9 with the Python 3.11 version you installed.
+
+This creates:
+
+.python-version
+
+
+inside your project.
+
+The .python-version file tells pyenv:
+
+"This project should use Python 3.11.9."
+
+============================================================
+STEP 9 - VERIFY PROJECT PYTHON
+
+Run:
+
+python --version
+
+
+Expected:
+
+Python 3.11.9
+
+
+Also run:
+
+which python
+
+
+It should point somewhere under:
+
+~/.pyenv/versions/3.11.9/bin/python
+
+
+For example:
+
+/home/program/.pyenv/versions/3.11.9/bin/python
+
+============================================================
+STEP 10 - CREATE THE VIRTUAL ENVIRONMENT
+
+Make sure you are inside the project:
+
+cd ~/Documents/Tutor/Campus/4_LangGraph
+
+
+Create the virtual environment:
+
+python -m venv .venv
+
+
+Because "python" is currently Python 3.11.9, the virtual
+environment will also use Python 3.11.9.
+
+============================================================
+STEP 11 - ACTIVATE THE VIRTUAL ENVIRONMENT
+
+Run:
+
+source .venv/bin/activate
+
+
+Your terminal prompt should now show something similar to:
+
+(.venv) program@pepo:~/Documents/Tutor/Campus/4_LangGraph$
+
+============================================================
+STEP 12 - VERIFY THE VIRTUAL ENVIRONMENT
+
+Run:
+
+python --version
+
+
+Expected:
+
+Python 3.11.9
+
+
+Then:
+
+which python
+
+
+Expected:
+
+/home/program/Documents/Tutor/Campus/4_LangGraph/.venv/bin/python
+
+
+Check pip:
+
+python -m pip --version
+
+
+It should point to the .venv directory.
+
+============================================================
+STEP 13 - UPGRADE PYTHON PACKAGING TOOLS
+
+Inside the activated .venv, run:
+
+python -m pip install --upgrade pip setuptools wheel
+
+============================================================
+STEP 14 - CONFIGURE VS CODE
+
+Open the project:
+
+code .
+
+
+In VS Code:
+
+1. Press Ctrl + Shift + P
+
+2. Search:
+   Python: Select Interpreter
+
+3. Select:
+
+   .venv/bin/python
+
+
+If it is not listed, choose:
+
+Enter interpreter path
+
+
+and select:
+
+/home/program/Documents/Tutor/Campus/4_LangGraph/.venv/bin/python
+
+============================================================
+STEP 15 - VERIFY PYTHON FROM VS CODE
+
+Open a NEW terminal inside VS Code.
+
+Run:
+
+python --version
+
+
+Expected:
+
+Python 3.11.9
+
+
+Run:
+
+which python
+
+
+Expected:
+
+/home/program/Documents/Tutor/Campus/4_LangGraph/.venv/bin/python
+
+============================================================
+STEP 16 - INSTALL PROJECT PACKAGES
+
+Make sure the virtual environment is active:
+
+source .venv/bin/activate
+
+
+Then install packages normally.
+
+For example:
+
+python -m pip install langgraph
+
+
+or install dependencies from requirements.txt:
+
+python -m pip install -r requirements.txt
+
+============================================================
+STEP 17 - ADD .venv TO GITIGNORE
+
+The virtual environment should NOT normally be committed
+to Git.
+
+If your project uses Git, run:
+
+echo ".venv/" >> .gitignore
+
+
+You may also add:
+
+.python-version
+
+
+depending on whether you want the Python version to be shared
+with other developers.
+
+A common Python project .gitignore includes:
+
+.venv/
+__pycache__/
+*.pyc
+.env
+
+============================================================
+IMPORTANT: .env VS .venv
+
+Do not confuse:
+
+.venv
+
+
+with:
+
+.env
+
+
+They are different things.
+
+.venv
+Python virtual environment directory.
+
+.env
+Usually a file containing environment variables such as:
+
+    API_KEY=xxxxx
+    DATABASE_URL=xxxxx
+
+
+For example:
+
+4_LangGraph/
+|
++-- .venv/
+|     +-- bin/
+|     +-- lib/
+|     +-- ...
+|
++-- .env
++-- .gitignore
++-- requirements.txt
++-- your_code.py
+
+============================================================
+USEFUL DAILY WORKFLOW
+
+When starting work:
+
+cd ~/Documents/Tutor/Campus/4_LangGraph
+
+
+Activate the environment:
+
+source .venv/bin/activate
+
+
+Check Python:
+
+python --version
+
+
+Expected:
+
+Python 3.11.9
+
+
+Work on the project.
+
+When finished:
+
+deactivate
+
+============================================================
+VERIFY SYSTEM PYTHON IS STILL SAFE
+
+After everything is configured, you can verify that the
+system Python has NOT been changed.
+
+From a terminal where the virtual environment is NOT active:
+
+deactivate
+
+
+Then:
+
+/usr/bin/python3 --version
+
+
+Expected:
+
+Python 3.8.10
+
+
+This is good.
+
+Your Ubuntu system Python remains Python 3.8.
+
+============================================================
+FINAL EXPECTED SETUP
+
+Ubuntu system:
+
+/usr/bin/python3
+    |
+    +-- Python 3.8.10
+
+
+pyenv:
+
+~/.pyenv/
+    |
+    +-- versions/
+          |
+          +-- 3.11.9/
+                |
+                +-- bin/python
+
+
+Project:
+
+~/Documents/Tutor/Campus/4_LangGraph/
+    |
+    +-- .python-version
+    |       |
+    |       +-- 3.11.9
+    |
+    +-- .venv/
+    |       |
+    |       +-- bin/python
+    |             |
+    |             +-- Python 3.11.9
+    |
+    +-- .env
+    +-- .gitignore
+    +-- requirements.txt
+    +-- project files
+
+============================================================
+QUICK VERSION
+
+If pyenv is already installed and configured:
+
+cd ~/Documents/Tutor/Campus/4_LangGraph
+
+pyenv install 3.11.9
+
+pyenv local 3.11.9
+
+python --version
+
+python -m venv .venv
+
+source .venv/bin/activate
+
+python --version
+
+python -m pip install --upgrade pip setuptools wheel
+
+code .
+
+============================================================
+SAFETY SUMMARY
+
+SAFE:
+
+pyenv install 3.11.9
+
+pyenv local 3.11.9
+
+python -m venv .venv
+
+source .venv/bin/activate
+
+python -m pip install <package>
+
+
+AVOID:
+
+sudo pip install <package>
+
+sudo ln -sf ... /usr/bin/python3
+
+replacing /usr/bin/python3
+
+removing Ubuntu's Python 3.8 packages
+
+
+The goal is:
+
+Ubuntu system Python 3.8
+         +
+pyenv Python 3.11
+         +
+project .venv using Python 3.11
+
+
+All three can coexist safely.

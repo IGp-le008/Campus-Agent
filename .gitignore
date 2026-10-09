@@ -3,6 +3,8 @@
 !Campus
 !Campus/**
 
+Campus/.gitignore
+
 !1_structured_output
 !1_structured_output/**
 
@@ -15,6 +17,10 @@
 
 !3_document_loaders
 !3_document_loaders/**
+
+!4_LangGraph
+!4_LangGraph/app
+!4_LangGraph/app/*
 
 Campus.code-workspace
 
