@@ -1,18 +1,36 @@
 import streamlit as st
 
-# Box area for user Chat 
-
-with st.chat_message('user'):
-    st.text('Hi!')
-
-# Box area for Ai Chat
-
-with st.chat_message('assistant'):
-    st.text("Hello how can I help you?")
-
-user_input = st.chat_input("Type here")
+#To iniitalize the session state to store message history
+if 'msg_history' not in st.session_state:
+    st.session_state['msg_history']=[]
 
 
-if user_input:
+#Dispaly all the message history
+for msg in st.session_state['msg_history']:
+    with st.chat_message(msg['role']):
+        st.text(msg['message'])
+
+
+user_msg = st.chat_input("Type here!")
+
+if user_msg:
+
+    #Append user message to session state
+    st.session_state['msg_history'].append({
+        'role' : 'user',
+        'message' : user_msg
+    })
+
     with st.chat_message('user'):
-        st.text(user_input)
+        st.text(user_msg)
+
+    #Append assistant message to session state
+    st.session_state['msg_history'].append({
+        'role' : 'assistant',
+        'message' : user_msg
+    })
+
+    with st.chat_message('assistant'):
+        st.text(user_msg)
+
+    
