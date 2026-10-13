@@ -10,6 +10,8 @@ from langgraph.graph.message import add_messages
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import InMemorySaver
 
+import streamlit as st
+
 
 # Load the .env file from the Campus directory
 ENV_PATH = Path(__file__).resolve().parents[3] / ".env"
