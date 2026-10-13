@@ -1,36 +1,83 @@
-import streamlit as st
 
-#To iniitalize the session state to store message history
-if 'msg_history' not in st.session_state:
-    st.session_state['msg_history']=[]
+import os
+from pathlib import Path
+from typing import TypedDict, Annotated
+
+from dotenv import load_dotenv
+from langchain_core.messages import BaseMessage, HumanMessage
+from langchain_openai import ChatOpenAI
+from langgraph.graph.message import add_messages
+from langgraph.graph import StateGraph, START, END
+from langgraph.checkpoint.memory import InMemorySaver
 
 
-#Dispaly all the message history
-for msg in st.session_state['msg_history']:
-    with st.chat_message(msg['role']):
-        st.text(msg['message'])
+# Load the .env file from the Campus directory
+ENV_PATH = Path(__file__).resolve().parents[3] / ".env"
+load_dotenv(ENV_PATH)
+
+# Validate the API key
+api_key = os.getenv("OPENROUTER_API_KEY")
+
+if not api_key:
+    raise ValueError(
+        f"OPENROUTER_API_KEY was not found. Check your .env file: {ENV_PATH}"
+    )
 
 
-user_msg = st.chat_input("Type here!")
+# Initialize the model
+llm = ChatOpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=api_key,
+    model="nvidia/nemotron-3.5-lightning:free",
+)
 
-if user_msg:
 
-    #Append user message to session state
-    st.session_state['msg_history'].append({
-        'role' : 'user',
-        'message' : user_msg
-    })
+# Define the graph state
+class ChatState(TypedDict):
+    messages: Annotated[list[BaseMessage], add_messages]
 
-    with st.chat_message('user'):
-        st.text(user_msg)
 
-    #Append assistant message to session state
-    st.session_state['msg_history'].append({
-        'role' : 'assistant',
-        'message' : user_msg
-    })
+# Create the chatbot node
+def chat_node(state: ChatState):
+    response = llm.invoke(state["messages"])
+    return {"messages": [response]}
 
-    with st.chat_message('assistant'):
-        st.text(user_msg)
 
-    
+# Create the graph
+builder = StateGraph(ChatState)
+
+builder.add_node("chat_node", chat_node)
+
+builder.add_edge(START, "chat_node")
+builder.add_edge("chat_node", END)
+
+
+# Enable conversation memory
+checkpointer = InMemorySaver()
+
+chat_bot = builder.compile(checkpointer=checkpointer)
+
+
+# Configure the conversation thread
+# config = {
+#     "configurable": {
+#         "thread_id": "thread-0"
+#     }
+# }
+
+
+# Run the chatbot interactively
+# if __name__ == "__main__":
+#     while True:
+#         user_input = input("You: ")
+
+#         if user_input.strip().lower() in {"exit", "quit"}:
+#             break
+
+#         result = chat_bot.invoke(
+#             {"messages": [HumanMessage(content=user_input)]},
+#             config=config,
+#         )
+
+#         print("Bot:", result["messages"][-1].content)
+
