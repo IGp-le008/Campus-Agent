@@ -19,10 +19,10 @@ load_dotenv(ENV_PATH)
 api_key = os.getenv("OPENROUTER_API_KEY")
 
 if not api_key:
-    raise ValueError(
-        f"OPENROUTER_API_KEY was not found. Check your .env file: {ENV_PATH}"
-    )
-
+    try:
+        api_key = st.secrets["OPENROUTER_API_KEY"]
+    except (KeyError, FileNotFoundError):
+        api_key = None
 
 # Initialize the model
 llm = ChatOpenAI(

@@ -2,12 +2,6 @@ import streamlit as st
 from backend import chat_bot
 from langchain.messages import HumanMessage
 
-#Code to allow API keys in streamlit
-headers = {
-    "authorization" : st.secrets["auth_token"],
-    "content-type" : "application/json"
-}
-
 THREAD_ID = '1'
 
 CONFIG = {
