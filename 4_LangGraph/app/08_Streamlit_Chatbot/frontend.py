@@ -39,20 +39,24 @@ if user_msg:
     # Invoke the LangGraph chatbot
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            ai_reply = chat_bot.invoke(
-                {
+            ai_msg = st.write_stream(
+               ( 
+                message_chunk.content for message_chunk, metadata in chat_bot.stream(
+                    {
                     "messages": [
                         HumanMessage(content=user_msg)
                     ]
                 },
-                config=CONFIG
+                config=CONFIG,
+                stream_mode = 'messages'
+                )
+                if message_chunk.content
+                )
             )
+            
+        # Store the assistant response for subsequent reruns
+        st.session_state["msg_history"].append({
+            "role": "assistant",
+            "message": ai_msg
+        })
 
-            ai_msg = ai_reply["messages"][-1].content
-            st.write(ai_msg)
-
-    # Store the assistant response for subsequent reruns
-    st.session_state["msg_history"].append({
-        "role": "assistant",
-        "message": ai_msg
-    })
