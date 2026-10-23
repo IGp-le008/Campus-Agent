@@ -9,20 +9,27 @@ from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import InMemorySaver
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import BaseMessage, HumanMessage
-
+from langsmith import traceable
 
 # -----------------------------------------Load Environment Variables-----------------------------------------
 
 # Load environment variables from parent directory
 ENV_PATH = Path("/home/program/Documents/Tutor/Campus/5_LangSmith/.env")
-load_dotenv(ENV_PATH)
+load_dotenv(ENV_PATH, override=True)
+
+# Verify LangSmith configuration
+print("\n=== LangSmith Configuration ===")
+print(f"✓ LANGCHAIN_TRACING_V2: {os.getenv('LANGCHAIN_TRACING_V2')}")
+print(f"✓ LANGCHAIN_PROJECT: {os.getenv('LANGCHAIN_PROJECT')}")
+print(f"✓ LANGCHAIN_API_KEY set: {'Yes' if os.getenv('LANGCHAIN_API_KEY') else 'No'}")
+print(f"✓ LANGCHAIN_ENDPOINT: {os.getenv('LANGCHAIN_ENDPOINT')}")
 
 api_key = os.getenv("OPENROUTER_API_KEY")
 
 if api_key:
-    print(f"✓ API Key loaded: {api_key[:20]}...")
+    print(f"\n✓ OPENROUTER_API_KEY loaded: {api_key[:20]}...")
 else:
-    print("✗ API Key not found")
+    print("\n✗ OPENROUTER_API_KEY not found")
 
 
 # -----------------------------------------Initialize LLM-----------------------------------------
@@ -90,15 +97,20 @@ print("✓ Graph compiled with InMemorySaver checkpointer")
 
 
 # -----------------------------------------Test the Chatbot-----------------------------------------
-
+@traceable(name="test_chatbot")
 def test_chatbot():
     """Test the chatbot with a sample message"""
     user_message = input("Enter here :")
     thread_id = "test-thread-1"
 
     config = {
-        'configurable': {
-            'thread_id': thread_id
+        "configurable": {
+            "thread_id": thread_id
+        },
+        "run_name": "01_tools_project",
+        "tags": ["openrouter", "nemotron"],
+        "metadata": {
+            "model": "nvidia/nemotron-3.5-lightning:free"
         }
     }
 
@@ -113,7 +125,7 @@ def test_chatbot():
 
 
 # -----------------------------------------Graph Visualization-----------------------------------------
-
+@traceable(name="visual_graph")
 def visualize_graph():
     """
     Visualize the graph structure
