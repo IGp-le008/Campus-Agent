@@ -22,6 +22,11 @@ Campus/.gitignore
 !4_LangGraph/app
 !4_LangGraph/app/*
 
+!5_LangSmith
+!5_Langsmith/
+5_Langsmith/.env
+
+
 Campus.code-workspace
 
 
