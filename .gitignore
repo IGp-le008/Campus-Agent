@@ -26,6 +26,8 @@ Campus/.gitignore
 !5_LangSmith/app
 !5_LangSmith/app/*
 5_Langsmith/.env
+!5_LangSmith/resource
+!5_LangSmith/resource/*
 
 
 Campus.code-workspace
